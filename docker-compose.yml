@@ -4,27 +4,27 @@ services:
   n8n:
     image: n8nio/n8n
     container_name: n8n
+    restart: always
     ports:
       - "5678:5678"
     environment:
       - N8N_BASIC_AUTH_ACTIVE=true
       - N8N_BASIC_AUTH_USER=admin
       - N8N_BASIC_AUTH_PASSWORD=admin123
-      - N8N_SECURE_COOKIE=false   # Optional: disable secure cookie if no HTTPS yet
-      - NODE_ENV=production
+      - N8N_PORT=5678
+      - N8N_SECURE_COOKIE=false
     volumes:
       - n8n_data:/home/node/.n8n
     restart: unless-stopped
 
   mcp:
     image: gyoridavid/short-video-maker:latest-tiny
-    container_name: short-video-maker
+    container_name: mcp
+    restart: always
     ports:
       - "3123:3123"
     environment:
-      LOG_LEVEL: debug
-      PEXELS_API_KEY: 3tnRS1UdvzCQlQICXkw7NwP7pdSKbq6QflazbnlNXFN0I2D689Fb5nZ6
+      - LOG_LEVEL=debug
+      - PEXELS_API_KEY=3tnRS1UdvzCQlQICXkw7NwP7pdSKbq6QflazbnlNXFN0I2D689Fb5nZ6
     restart: unless-stopped
 
-volumes:
-  n8n_data:
