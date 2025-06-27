@@ -25,8 +25,8 @@ services:
     ports:
       - "3123:3123"
     environment:
-      - LOG_LEVEL=debug
-      - PEXELS_API_KEY=3tnRS1UdvzCQlQICXkw7NwP7pdSKbq6QflazbnlNXFN0I2D689Fb5nZ6
+      LOG_LEVEL: debug
+      PEXELS_API_KEY: 3tnRS1UdvzCQlQICXkw7NwP7pdSKbq6QflazbnlNXFN0I2D689Fb5nZ6
     restart: unless-stopped
 
 volumes:
