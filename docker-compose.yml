@@ -4,7 +4,6 @@ services:
   n8n:
     image: n8nio/n8n
     container_name: n8n
-    restart: always
     ports:
       - "5678:5678"
     environment:
@@ -13,6 +12,9 @@ services:
       - N8N_BASIC_AUTH_PASSWORD=admin123
       - N8N_PORT=5678
       - N8N_SECURE_COOKIE=false
+      - N8N_HOST=0.0.0.0
+      - N8N_PROTOCOL=http
+      - WEBHOOK_TUNNEL_URL=http://localhost:5678
     volumes:
       - n8n_data:/home/node/.n8n
     restart: unless-stopped
@@ -20,7 +22,6 @@ services:
   mcp:
     image: gyoridavid/short-video-maker:latest-tiny
     container_name: mcp
-    restart: always
     ports:
       - "3123:3123"
     environment:
@@ -28,3 +29,5 @@ services:
       - PEXELS_API_KEY=3tnRS1UdvzCQlQICXkw7NwP7pdSKbq6QflazbnlNXFN0I2D689Fb5nZ6
     restart: unless-stopped
 
+volumes:
+  n8n_data:
